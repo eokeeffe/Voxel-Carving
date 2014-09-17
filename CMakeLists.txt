@@ -4,13 +4,15 @@ PROJECT(Voxel-Carving)
 # required packages
 FIND_PACKAGE(VTK REQUIRED)
 FIND_PACKAGE(OpenCV REQUIRED)
+FIND_PACKAGE(Boost COMPONENTS system filesystem program_options REQUIRED)
 
 # required macros and variables
-INCLUDE(${VTK_USE_FILE})
+INCLUDE(${VTK_USE_FILE} ${Boost_INCLUDE_DIR})
 
-FILE(GLOB SOURCES 	${CMAKE_SOURCE_DIR}/src/*.cpp 
-                    ${CMAKE_SOURCE_DIR}/src/*.h)
+set (PROJECT_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
-ADD_EXECUTABLE(main ${SOURCES})
+ADD_EXECUTABLE(main ${PROJECT_SOURCE_DIR}/main.cpp)
+ADD_EXECUTABLE(program_options ${PROJECT_SOURCE_DIR}/program_options.cpp)
 
-TARGET_LINK_LIBRARIES(main ${OpenCV_LIBS} ${VTK_LIBRARIES})
+TARGET_LINK_LIBRARIES(main ${OpenCV_LIBS} ${VTK_LIBRARIES} ${Boost_LIBRARIES})
+TARGET_LINK_LIBRARIES(program_options ${Boost_LIBRARIES})
