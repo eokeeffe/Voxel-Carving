@@ -1,10 +1,12 @@
 /*
 *   Example on how to run the program
-*   ./main --directory ~/reconstruction/Voxel-Carving/assets --voxdim 128
+*   ./main --directory ~/reconstruction/Voxel-Carving/assets --voxdim 128 --output file_name --render 0
 *   images have just names 00.jpg->99.jpg or 000.jpg->999.jpg
 *   images must be in this format to be lined up correctly at run time
+*
+*   must be accompanied by viff.xml , opencv file containing pose estimation for the image numbers
+*   
 *   Evan O'Keeffe
-*   10324289
 */
 
 #include <iostream>
@@ -369,9 +371,9 @@ int main(int argc, char* argv[]) {
     //cv::imshow("Squirrel Silhouette", segmented);
 
     std::cout << "Rendering & Saving stl model" << std::endl;
-    std::cout << "saving model to output.stl" << std::endl;
+    std::cout << "saving model to " << output+".ply" << std::endl;
 
-    renderModel(fArray, params, output+".stl");
+    renderModel(fArray, params, output);
     
     return 0;
 }
